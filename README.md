@@ -32,7 +32,7 @@ To get started, clone this repository to your local machine:
 ## 🌍 Contributing
 
 💡 Found a bug? Have an awesome idea? Contributions are **always welcome**!  
-📜 Check out our [Contribution Guidelines](CONTRIBUTING.md) to get started.
+📜 Check out our [Contribution Guidelines](Contribution_Guidelines.md) to get started.
 
 ---
 
