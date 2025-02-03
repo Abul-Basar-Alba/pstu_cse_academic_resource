@@ -1,4 +1,4 @@
-
+![PSTU CSE Academic Resource](https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMHBkbHAzdWluemIwZ2c5NmdoNHEzbnJ0bnpmdWxjdXVqN2l2aGs1NiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/bGgsc5mWoryfgKBx1u/giphy.gif)
 
 # 🎓 Welcome to **PSTU CSE Academic Resource** 🚀
 
