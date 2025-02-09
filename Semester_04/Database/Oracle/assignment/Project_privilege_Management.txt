@@ -8,6 +8,7 @@ user Person1, insert data into NEWSPAPER table as user Person1, give
 privileges SELECT, insert ON NEWSPAPER table TO Person2 from user Person1; 
 Show NEWSPAPER table and insert data into NEWSPAPER table from user Person2.
 
+Answer:
 
 C:\Users\Radiant Computer>sqlplus
 
