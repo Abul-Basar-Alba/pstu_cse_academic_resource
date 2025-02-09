@@ -5,7 +5,7 @@ and Insert data into BOOKSHELF table where Rating will be one attribute.
 Create a row-level BEFORE UPDATE trigger which will be executed only if the
 Rating value is updated to BOOKSHELF table. 
 
-
+Answer:
 
 C:\Users\Radiant Computer>sqlplus
 
