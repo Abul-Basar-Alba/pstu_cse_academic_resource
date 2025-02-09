@@ -1,0 +1,155 @@
+                 Project privilege Management
+
+1.Create a user named Person2, give password 1234, give privilege 
+CREATE SESSION to Person2; Create another user named Person1, give 
+password 5678, give privilege CREATE SESSION, CREATE TABLE, CREATE 
+VIEW, CREATE SYNONYM to Person1; create a table named NEWSPAPER under 
+user Person1, insert data into NEWSPAPER table as user Person1, give 
+privileges SELECT, insert ON NEWSPAPER table TO Person2 from user Person1; 
+Show NEWSPAPER table and insert data into NEWSPAPER table from user Person2.
+
+
+C:\Users\Radiant Computer>sqlplus
+
+SQL*Plus: Release 10.2.0.1.0 - Production on Sun Feb 9 12:35:28 2025
+
+Copyright (c) 1982, 2005, Oracle.  All rights reserved.
+
+Enter user-name: system
+Enter password:
+
+Connected to:
+Oracle Database 10g Express Edition Release 10.2.0.1.0 - Production
+
+SQL> CREATE USER Person2 IDENTIFIED BY 1234;
+CREATE USER Person2 IDENTIFIED BY 1234
+                                  *
+ERROR at line 1:
+ORA-00988: missing or invalid password(s)
+
+ -- Password must start with a letter
+
+SQL> CREATE USER Person2 IDENTIFIED BY P1234;
+
+User created.
+
+SQL> GRANT CREATE SESSION TO Person2;
+
+Grant succeeded.
+
+SQL> CREATE USER Person1 IDENTIFIED BY P5678;
+
+User created.
+
+SQL> GRANT CREATE SESSION, CREATE TABLE, CREATE VIEW, CREATE SYNONYM TO Person1;
+
+Grant succeeded.
+
+-- Step 4: Grant quota on USERS tablespace to Person1
+
+SQL>  ALTER USER Person1 QUOTA UNLIMITED ON USERS;
+
+User altered.
+
+SQL> CONNECT Person1/P5678;
+Connected.
+
+--This is Error part
+
+SQL> CREATE TABLE NEWSPAPER (
+  2      id NUMBER PRIMARY KEY,
+  3      title VARCHAR2(100)
+  4  );
+CREATE TABLE NEWSPAPER (
+*
+ERROR at line 1:
+ORA-01950: no privileges on tablespace 'SYSTEM'
+
+
+SQL> ALTER USER Person1 DEFAULT TABLESPACE USERS;
+ALTER USER Person1 DEFAULT TABLESPACE USERS
+*
+ERROR at line 1:
+ORA-01031: insufficient privileges
+
+--Here Error solved 
+
+SQL> CONNECT SYSTEM/123;
+Connected.
+SQL> ALTER USER Person1 QUOTA UNLIMITED ON USERS;
+
+User altered.
+
+SQL> ALTER USER Person1 DEFAULT TABLESPACE USERS;
+
+User altered.
+
+SQL> CONNECT Person1/P5678;
+Connected.
+SQL>
+SQL> CREATE TABLE NEWSPAPER (
+  2      id NUMBER PRIMARY KEY,
+  3      title VARCHAR2(100)
+  4  );
+
+Table created.
+
+SQL> INSERT INTO NEWSPAPER VALUES (1, 'The Times');
+
+1 row created.
+
+SQL> INSERT INTO NEWSPAPER VALUES (2, 'Daily Post');
+
+1 row created.
+
+SQL>
+SQL> GRANT SELECT, INSERT ON NEWSPAPER TO Person2;
+
+Grant succeeded.
+
+SQL> CONNECT Person2/P1234;
+Connected.
+SQL> SELECT * FROM Person1.NEWSPAPER;
+
+        ID
+----------
+TITLE
+--------------------------------------------------------------------------------
+         1
+The Times
+
+         2
+Daily Post
+
+
+SQL> INSERT INTO Person1.NEWSPAPER (id, title) VALUES (3, 'Morning Herald');
+
+1 row created.
+
+SQL>
+SQL> COMMIT;
+
+Commit complete.
+
+--After Step 11 (Insert as Person2):
+
+SQL> SELECT * FROM Person1.NEWSPAPER;
+
+        ID
+----------
+TITLE
+--------------------------------------------------------------------------------
+         1
+The Times
+
+         2
+Daily Post
+
+         3
+Morning Herald
+
+
+SQL> commit;
+
+Commit complete.
+ 	

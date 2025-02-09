@@ -1,0 +1,240 @@
+part (a):
+a)	Create a PROFILE named Combine where PASSWORD LIFE TIME will be 10 days, PASSWORD GRACE TIME will be 8 days, PASSWORD REUSE MAX will be 3, PASSWORD LOCK TIME will for 1 day, FAILED LOGIN ATTEMPTS for 2 times, PASSWORD REUSE TIME 10 day. Prove each profile by appropriate comment execution. Submit the consequent execution comment in text file. Also show the comment for showing your created profile.
+
+Microsoft Windows [Version 10.0.19045.5371]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\Radiant Computer>sqlplus
+
+SQL*Plus: Release 10.2.0.1.0 - Production on Tue Jan 28 11:57:30 2025
+
+Copyright (c) 1982, 2005, Oracle.  All rights reserved.
+
+Enter user-name: system
+Enter password:
+
+Connected to:
+Oracle Database 10g Express Edition Release 10.2.0.1.0 - Production
+
+SQL> Create profile C##ABLOG limit
+  2  password_life_time 10
+  3  password_grace_time 8
+  4  password_lock_time 1
+  5  failed_login_attempts 2
+  6  password_reuse_time 10
+  7  password_reuse_max 3 ;
+
+Profile created.
+
+SQL> create user C##SAFI identified by safi profile C##ABLOG;
+
+User created.
+
+SQL> grant create session to C##SAFI;
+
+Grant succeeded.
+
+SQL> connect C##safi/safi; {initial password : safi}
+SP2-0306: Invalid option.
+
+--Try connecting forwarding devices time by 10 days
+
+Usage: CONN[ECT] [logon] [AS {SYSDBA|SYSOPER}]
+where <logon>  ::= <username>[/<password>][@<connect_identifier>] | /
+
+--there we are getting a warning that password lifetime has expired and withinn grace time we must cahnge the password
+--default grace time is 7 days
+
+
+--lets time travel another 8 days
+
+SQL> connect C##safi/safi;
+Connected.
+
+--here account has been expired and we must change password now
+
+-- now lets try using wrong password 2 times
+
+SQL> connect C##SAFI/111;
+ERROR:
+ORA-01017: invalid username/password; logon denied
+
+
+Warning: You are no longer connected to ORACLE.
+
+--after trying wrong ans 2 times we use correct pass even though we can not login,account is locked and it will be unlocked after passwork lock time (1) days;lets travel time for 1 days
+
+SQL> password
+SP2-0640: Not connected
+SP2-0641: "PASSWORD" requires connection to server
+SQL> connect C##SAFI/safi;
+Connected.
+
+-- lets dive into password reuse time and password reuse max
+-- 1st unique changing password for first time
+
+SQL> password
+Changing password for C##SAFI
+Old password: safi
+New password: 111
+Retype new password: 111
+Password changed
+-- 2nd unique changing password for first time
+SQL> connect C##SAFI/111;
+Connected.
+SQL> password
+Changing password for C##SAFI
+Old password: 111
+New password: 999
+Retype new password: 999
+Password changed
+
+--trying to use initial password
+
+SQL> connect C##SAFI/999;
+Connected.
+SQL> password
+Changing password for C##SAFI
+Old password: 999
+New password: safi
+Retype new password: safi
+ERROR:
+ORA-28007: the password cannot be reused
+
+
+Password unchanged
+
+-- the password is not changed because we have to use at least password_reuse_max number password before using initial password
+-- more specificly we can not use PREVIOUS 3(password_reuse_max) password as new password.
+-- and lastly we can not resue password within (password-reuse_time) days
+--using 3rd unique password
+
+SQL> password
+Changing password for C##SAFI
+Old password: 999
+New password: 3
+Retype new password: 3
+Password changed
+
+--we have used 3(password_reuse_max) unique password
+-- so now we can use initial password
+
+SQL> password
+Changing password for C##SAFI
+Old password: 3
+New password: safi
+Retype new password: safi
+ERROR:
+ORA-28007: the password cannot be reused
+
+
+Password unchanged
+
+-- here we can not change pass because password reuse time is 10 days ,we must use same pass after 10 days,lets travel time and use same pass
+
+
+SQL> password
+Changing password for C##SAFI
+Old password: 3
+New password: safi
+Retype new password: safi
+Password changed
+
+
+part(b):
+b)	‘These two parameters are mutually exclusive; if you set a value for one of them, the other must not be set to UNLIMITED’-justify the statement.
+
+--lets create a profile and create a user to test
+
+SQL> create profile C##change limit
+  2  password_reuse_time unlimited
+  3  password_reuse_max 3;
+
+Profile created.
+
+SQL> create user C##cng identified by cng;
+
+User created.
+
+SQL> grant create session to C##cng;
+
+Grant succeeded.
+
+SQL> alter user C##cng profile C##change;
+
+User altered.
+
+
+-- lets try to reuse password
+
+SQL> password
+Changing password for C##CNG
+Old password: cng
+New password: cng
+Retype new password: cng
+ERROR:
+ORA-28007: The password cannot be reused.
+Help: https://docs.oracle.com/error-help/db/ora-28007/
+
+
+Password unchanged
+
+-- now try altering profile from system
+SQL> alter profile C##change limit
+  2  password_reuse_time 3
+  3  password_reuse_max unlimited;
+
+Profile altered.
+
+--now try reusing passowrd
+SQL> password
+Changing password for C##CNG
+Old password: cng
+New password: cng
+Retype new password: cng
+ERROR:
+ORA-28007: The password cannot be reused.
+Help: https://docs.oracle.com/error-help/db/ora-28007/
+
+
+Password unchanged
+
+
+-- lets try changing both limit with value and both unlimited
+-- both unlimited
+SQL> alter profile C##change limit
+  2  password_reuse_time unlimited
+  3  password_reuse_max unlimited;
+
+Profile altered.
+
+SQL> password
+Changing password for C##cng
+Old password: cng
+New password: cng
+Retype new password: cng
+Password changed
+
+SQL> alter profile C##change limit
+  2  password_reuse_time 1
+  3  password_reuse_max 1;
+
+Profile altered.
+
+SQL> password
+Changing password for C##cng
+Old password: cng
+New password: c
+Retype new password: c
+Password changed
+
+-- now traveling time for 1 day
+SQL> password
+Changing password for C##cng
+Old password: c
+New password: cng
+Retype new password: cng
+Password changed
+
+
+so the statement above in part (b) is true;
