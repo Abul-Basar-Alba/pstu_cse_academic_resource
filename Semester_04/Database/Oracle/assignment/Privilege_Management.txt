@@ -1,0 +1,101 @@
+                               Project privilege Management
+
+1.Create a user named Person2, give password 1234, give privilege CREATE SESSION to Person2; Create another user named Person1,
+ give password 5678, give privilege CREATE SESSION, CREATE TABLE, CREATE VIEW, CREATE SYNONYM to Person1; create a table named 
+NEWSPAPER under user Person1, insert data into NEWSPAPER table as user Person1, give privileges SELECT, insert ON NEWSPAPER table 
+TO Person2 from user Person1; Show NEWSPAPER table and insert data into NEWSPAPER table from user Person2. 		
+
+
+
+
+C:\Users\Radiant Computer>sqlplus
+
+SQL*Plus: Release 10.2.0.1.0 - Production on Wed Mar 12 19:08:12 2025
+
+Copyright (c) 1982, 2005, Oracle.  All rights reserved.
+
+Enter user-name: system
+Enter password:
+
+Connected to:
+Oracle Database 10g Express Edition Release 10.2.0.1.0 - Production
+
+SQL> create profile managment limit
+  2  password_life_time 10
+  3  password_grace_time 8
+  4  password_lock_time 1
+  5  failed_login_attempts 2
+  6  password_reuse_time 10
+  7  password_reuse_max 3;
+
+Profile created.
+
+SQL> drop user person2 cascade;
+
+User dropped.
+
+SQL> create user PERSON2 identified by p2123 profile managment;
+
+User created.
+
+SQL> grant create session to PERSON2;
+
+Grant succeeded.
+
+SQL> connect system/123;
+Connected.
+SQL> create user PERSON1 identified by p1123 profile managment;
+
+User created.
+
+SQL> grant create session,create table,create view,create synonym to PERSON1;
+
+Grant succeeded.
+
+SQL> alter user PERSON1
+  2  default tablespace users
+  3  quota 5m on users;
+
+User altered.
+
+SQL> connect PERSON1/p1123;
+Connected.
+SQL> create table newspaper(
+  2  name varchar(25));
+
+Table created.
+
+SQL> insert into newspaper values('The daily star');
+
+1 row created.
+
+SQL> select * from newspaper;
+
+NAME
+-------------------------
+The daily star
+
+SQL> grant select, insert on newspaper to PERSON2;
+
+Grant succeeded.
+
+SQL> connect PERSON2/p2123;
+Connected.
+SQL> select * from PERSON1.newspaper;
+
+NAME
+-------------------------
+The daily star
+
+SQL> insert into PERSON1.newspaper values('The daily campus');
+
+1 row created.
+
+SQL> select * from PERSON1.newspaper;
+
+NAME
+-------------------------
+The daily star
+The daily campus
+
+SQL>
