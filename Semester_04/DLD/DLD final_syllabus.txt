@@ -1,0 +1,310 @@
+Mahbub sir:
+Lecture:01
+Number System
+-decimal to octal
+-binary to octal
+-hexa decimal to octal
+It can be vice-versa 😄and also the base will be changed.
+1/2 marks Carry in final in this topic.
+
+
+
+CCE 221 | Murad Sir
+🌟 Lecture: 02-03
+🌸 Digital Logic & PC Design
+🥸 Chapter 1
+- Complements (r's and r-1's)
+- substruction with r's complement
+👻 Try to study r-1's complement as well for exam
+
+🐶 Chapter 2
+- Basic theorems and properties of bool algebra (basic therorem :: postulates)
+- Operator precedence
+- Venn Diagram
+- Boolean functions
+- Algebric manupulation
+- Canonical and standard forms
+- Minterm & Maxterm examples
+
+
+
+CCE -221 l Murad Sir
+🫥Lecture: 03-05
+🤯Digital Logic Design
+Chapter 2
+- Sum of Maxterm
+- Product of Maxterm
+-Example 2-5
+- Conversation between Canonical Forms
+-Standard Form
+
+Chapter  3
+Simplification of Boolean Function
+- 3-2 Two AND Three Variable Maps
+- Example 3-1
+-Example 3-2
+-Figure 3.5
+-Figure 3.6
+- Four Variable Map
+-Example 3-5
+-Example 3-6
+
+
+ Tue 03, Dec 24
+🔵 CCE 221 | Murad Sir
+🌟 Lecture: 6
+🌸 Digital Logic & PC Design
+😵 Chapter 3
+- Five and six variable maps
+
+
+
+ Mon 09, Dec 24
+🔵 CCE 221 | Murad Sir
+🌟 Lecture: 7
+🌸 Digital Logic & PC Design
+😵 Chapter 3
+- 3.8 - Don't care conditions
+- Figure 3.26 (a, b (H.W))
+
+
+ Sun 29, Dec 24
+🔵 CCE 221 | Mahbub Sir
+🌟 Lecture: 1
+🌸 Digital Logic & PC Design
+🤨 Chapter 2 (Recap)
+- table 2.1 (36 page)
+- table 2.6 - 2.8
+Not sure (most probably not needed)
+- IC digital logic families (page 55-57)
+- 2.8.3 characteristics of IC logic families
+
+
+Tue 07, January 2025
+🌼 CCE -221 l Mahabub Sir
+🌿 Lecture: 02
+
+✨Topics
+Chapter 01
+Page 30:: 1-9 Integrated Circuit
+Chapter 02
+Page 60:: 2-8 IC Digital Logic Families
+Page 67:: Characteristics of IC Logic Families ->Table 2-8
+Chapter 04
+Page 116:: 4-1 Introduction
+
+💫 Others::
+F = x'y + xy' + xy
+Power Distribution
+Propagation Delay
+Moore's Law
+Circuit Simplification
+
+
+
+ Wed 08, January 2025
+🌼 CCE -221 l Mahabub Sir
+🌿 Lecture: 03
+
+✨ Topics
+Chapter 04
+Page 116:: 4-1 Introduction
+Page 117:: 4-2 Design Procedure
+Page 119:: Half-Adder
+Page 121:: Full-Adder
+Page 123:: Subtractors
+
+
+  Sun 12, Jan 2025
+🔵 CCE -221 l Mahabub Sir
+🌟 Lecture: 04
+
+🌸 Topics
+Chapter 04
+Page 125:: 4-5 Code Conversion
+
+
+
+  Sun 12, Jan 2025
+🔵 CCE -221 l Mahabub Sir
+🌟 Lecture: 04
+
+🌸 Topics
+Chapter 04
+Page 125:: 4-5 Code Conversion
+
+
+
+Wed 15, Jan 25
+🔵 CCE -221 l Mahabub Sir
+🌟 Lecture: 06
+
+🌸 Topics
+Chapter 04
+Page 135 :: Implementation of F = A(B+CD)+BC' with NAND
+Page 136 :: Implementation of (A+B')(CD+E) with NAND (practice)
+Page 137-138 :: Derivation
+Page 140 :: NAND
+Page 141 :: as Universal gate
+Page 143 :: Analysis procedure
+Page 145-146 :: XOR & eq. fun.
+Page 147-149 :: Parity :)
+
+
+Tue 21, Jan 25
+🔵 CCE -221 l Mahabub Sir
+🌟 Lecture: 07
+
+🌸 Topics
+Chapter 04
+Page 147-149 :: Parity :)
+
+Chapter 05
+Page 154-161 :: Intro, parallel adder, carry propagation
+
+
+Sun 26, Jan 25
+🔵 CCE -221 l Mahabub Sir
+🌟 Lecture: 08
+
+🌸 Topics
+Chapter 05
+Page 161-167
+:: Decimal adder
+:: Magnitude comparator
+
+Sir asked us to buy every ch5 IC components, like the footnote of page 166 :)
+
+
+ 27-01-2025
+CCE -221 l Mahabub Sir
+Lecture:: 09
+
+☘ Topics
+
+Chapter 05
+5-5 Decoders
+:: Page 167-175
+
+Task:: 2x4 to 4x16
+
+
+
+ Thu 06, Feb 25
+🔵 CCE 221 | Murad Sir
+🌟 Lecture: 8
+🌸 Digital Logic & PC Design
+😵 Chapter 3
+- Prime implicants
+- Essential prime implicants
+
+
+23-02-2025
+CCE-221 l Murad Sir
+Lecture :: 09
+
+Topics::
+Chapter -03
+
+Tabular Method
+Simplify Don’t Care Condition using Tabular Method.
+
+
+Sun 23, Feb 25
+CCE -221 l Mahabub Sir
+Lecture :: 10
+☘️ Topics
+Chapter 05
+- Boolean function implementation
+  (page 178 - hardcopy)
+- Read only memory (ROM)
+- Combinational logic implementation
+- Types of ROM
+- Programmable logic array (PLA)
+  (till PLA program table, this topic is not covered)
+
+The end of ch 05/08
+
+
+Mon 24, Feb 25
+CCE -221 l Mahabub Sir
+Lecture :: 11
+☘️ Topics
+Chapter 06
+- Sequencial logic
+    - Asynchronus
+    - Synchronus
+- Memory elements
+    - Latch
+    - Flip-flop
+- Clocked RS Flip-Flop
+  (will be continued)
+
+
+  Mon 24, Feb 25
+CCE -221 l Mahabub Sir
+Lecture :: 11
+☘️ Topics
+Chapter 06
+- Sequencial logic
+    - Asynchronus
+    - Synchronus
+- Memory elements
+    - Latch
+    - Flip-flop
+- Clocked RS Flip-Flop
+  (will be continued)
+
+
+
+  Tue 6, Mar 25
+CCE -221 l Mahabub Sir
+Lecture :: 13
+☘️ Topics
+Chapter 07
+- Slide (ch 6) -> Full
+
+Book
+- 7-2 Registers, Fig 7-3, Fig 7-4
+- Example 7-1
+- Shift registers, Fig 7-7, Fig 7-8
+- Bidirectional shift register with parallel load
+- Fig 7-9
+- Serial addition
+- Fig 7-10
+- Ripple counters, binary ripple counter, Fig 7-12
+- BCD ripple counter, Fig 7-15
+- Synchronous counter, Fig 7-17
+- Johnson counter
+- The memory unit, Fig 7-24, Fig 7-25, Fig 7-26
+- Fig 7-29, Fig 7-30
+- Magnetic core memory++
+
+
+
+10-03-2025
+CCE-221 l Mahabub Sir
+Lecture :: 14
+🌱 Topics
+
+Chapter:: 08
+
+Page ::305 - 311 (before Bus Transfer)
+Page:: 314(memory transfer) - 320 (Shift Microoperations)
+Page:: 327 (overflow)  -328 (end)
+
+Chapter :: 06
+6-4 Analysis of Clocked Sequential Circuit
+Example of Sequential Circuit
+Table 6-1
+State Diagram
+State Equation
+Flip-flop
+State Reduction
+State Assignment
+Table 6-7
+Design procedure
+
+
+
+
