@@ -1,0 +1,55 @@
+--bookshelf table
+
+create table bookshelf(
+book_id number primary key,
+title varchar(50),
+publisher varchar(50),
+categoryName varchar(40),
+rating varchar(2),
+audit_date date);
+
+--bookshelf_audit
+create table bookshelf_audit(
+title varchar(50),
+publisher varchar(50),
+categoryName varchar(40),
+old_rating varchar(2),
+new_rating varchar(2),
+audit_date date);
+
+insert into bookshelf(book_id,title,publisher,categoryName,rating,audit_date) 
+values (1,'Belaforabar age','Shumokal','Religion',5,TO_DATE('2021-02-01','YYYY-MM-DD'));
+
+insert into bookshelf(book_id,title,publisher,categoryName,rating,audit_date) 
+values (2,'peridecsical sajid','Shumokal','Religion','5',TO_DATE('2021-02-01','YYYY-MM-DD'));
+
+create or replace trigger bookshelf_audit_bef_upd
+before update on bookshelf
+for each row 
+when ( new.rating < old.rating )
+begin
+insert into bookshelf_audit(title,publisher,categoryName,old_rating,new_rating,audit_date)
+values(:old.title,:old.publisher,:old.categoryName,:old.rating,:new.rating,sysdate);
+end;
+/
+
+update bookshelf set rating='3' where book_id=1;
+
+create or replace trigger bookshelf_audit_bef_upd_ins
+before insert or update of rating on bookshelf
+for each row 
+begin 
+if INSERTING then 
+insert into bookshelf_audit(title,publisher,categoryName,new_rating,audit_date)
+values(:new.title,:new.publisher,:new.categoryName,:new.rating,sysdate);
+else 
+insert into bookshelf_audit(title,publisher,categoryName,old_rating,new_rating,audit_date)
+values(:old.title,:old.publisher,:old.categoryName,:old.rating,:new.rating,sysdate);
+end if;
+end;
+/
+
+insert into bookshelf(book_id,title,publisher,categoryName,rating,audit_date) 
+values (3,'peridecsical sajid2','Shumokal','Religion','5',TO_DATE('2017-02-01','YYYY-MM-DD'));
+
+update bookshelf set rating='4' where book_id=3;

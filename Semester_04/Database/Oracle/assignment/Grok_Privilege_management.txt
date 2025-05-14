@@ -1,0 +1,47 @@
+-- Step 1: Create user Person2
+CREATE USER Person2 IDENTIFIED BY p1234;
+GRANT CREATE SESSION to Person2;
+
+-- Step 2: Create user Person1
+CREATE USER Person1 IDENTIFIED BY p5678;
+GRANT CREATE SESSION, CREATE TABLE, CREATE VIEW, CREATE SYNONYM TO Person1;
+
+-- Step 3: Create NEWSPAPER table under Person1
+-- Connect as Person1 (in some DBMS, you may need to log in as Person1)
+--CONN Person1/5678;
+
+connect system/sys1234;
+
+   alter user PERSON1
+    default tablespace users
+    quota 5m on users;
+
+connect Person1/p5678;
+
+CREATE TABLE NEWSPAPER (
+    ID NUMBER PRIMARY KEY,
+    Title VARCHAR2(100),
+    Publication_Date DATE
+);
+
+-- Step 4: Insert data into NEWSPAPER table as Person1
+INSERT INTO NEWSPAPER (ID, Title, Publication_Date) VALUES (1, 'Daily News', TO_DATE('2025-05-01', 'YYYY-MM-DD'));
+INSERT INTO NEWSPAPER (ID, Title, Publication_Date) VALUES (2, 'Morning Post', TO_DATE('2025-05-02', 'YYYY-MM-DD'));
+
+-- Step 5: Grant SELECT and INSERT privileges to Person2
+GRANT SELECT, INSERT ON NEWSPAPER TO Person2;
+
+-- Step 6: Connect as Person2 and perform operations
+CONN Person2/p1234;
+
+-- Show the NEWSPAPER table
+SELECT * FROM Person1.NEWSPAPER;
+
+-- Insert data into NEWSPAPER table as Person2
+INSERT INTO Person1.NEWSPAPER (ID, Title, Publication_Date) VALUES (3, 'Evening Times', TO_DATE('2025-05-03', 'YYYY-MM-DD'));
+
+-- Verify the updated table
+SELECT * FROM Person1.NEWSPAPER;
+
+DROP USER PERSON1 CASCADE;
+DROP USER PERSON2 CASCADE;
