@@ -56,37 +56,53 @@
     <a name="circuit" val="main"/>
     <a name="circuitnamedboxfixedsize" val="true"/>
     <a name="simulationFrequency" val="1.0"/>
-    <comp lib="0" loc="(190,280)" name="Pin">
+    <comp lib="0" loc="(260,390)" name="Pin">
       <a name="appearance" val="NewPins"/>
-      <a name="label" val="A"/>
+      <a name="label" val="a2"/>
     </comp>
-    <comp lib="0" loc="(190,320)" name="Pin">
+    <comp lib="0" loc="(260,450)" name="Pin">
       <a name="appearance" val="NewPins"/>
-      <a name="label" val="B"/>
     </comp>
-    <comp lib="0" loc="(190,380)" name="Pin">
+    <comp lib="0" loc="(270,260)" name="Pin">
       <a name="appearance" val="NewPins"/>
-      <a name="label" val="C"/>
+      <a name="label" val="a"/>
     </comp>
-    <comp lib="0" loc="(190,420)" name="Pin">
+    <comp lib="0" loc="(270,300)" name="Pin">
       <a name="appearance" val="NewPins"/>
-      <a name="label" val="D"/>
+      <a name="label" val="b"/>
     </comp>
-    <comp lib="1" loc="(390,300)" name="XOR Gate"/>
-    <comp lib="1" loc="(390,400)" name="XOR Gate"/>
-    <comp lib="1" loc="(520,340)" name="XOR Gate"/>
-    <comp lib="5" loc="(550,340)" name="LED"/>
-    <wire from="(190,280)" to="(330,280)"/>
-    <wire from="(190,320)" to="(330,320)"/>
-    <wire from="(190,380)" to="(330,380)"/>
-    <wire from="(190,420)" to="(330,420)"/>
-    <wire from="(330,380)" to="(330,390)"/>
-    <wire from="(390,300)" to="(420,300)"/>
-    <wire from="(390,400)" to="(420,400)"/>
-    <wire from="(420,300)" to="(420,320)"/>
-    <wire from="(420,320)" to="(460,320)"/>
-    <wire from="(420,360)" to="(420,400)"/>
-    <wire from="(420,360)" to="(460,360)"/>
-    <wire from="(520,340)" to="(550,340)"/>
+    <comp lib="0" loc="(300,240)" name="Constant">
+      <a name="value" val="0x0"/>
+    </comp>
+    <comp lib="0" loc="(340,400)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="facing" val="west"/>
+      <a name="output" val="true"/>
+    </comp>
+    <comp lib="0" loc="(350,250)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="facing" val="west"/>
+      <a name="output" val="true"/>
+    </comp>
+    <comp lib="1" loc="(300,410)" name="NOT Gate"/>
+    <comp lib="2" loc="(330,400)" name="Multiplexer"/>
+    <comp lib="2" loc="(340,250)" name="Multiplexer"/>
+    <comp lib="8" loc="(293,352)" name="Text">
+      <a name="text" val="XOR with MUX"/>
+    </comp>
+    <comp lib="8" loc="(303,202)" name="Text">
+      <a name="text" val="AND with MUX"/>
+    </comp>
+    <wire from="(260,390)" to="(270,390)"/>
+    <wire from="(260,450)" to="(310,450)"/>
+    <wire from="(270,260)" to="(310,260)"/>
+    <wire from="(270,300)" to="(320,300)"/>
+    <wire from="(270,390)" to="(270,410)"/>
+    <wire from="(270,390)" to="(300,390)"/>
+    <wire from="(300,240)" to="(310,240)"/>
+    <wire from="(310,420)" to="(310,450)"/>
+    <wire from="(320,270)" to="(320,300)"/>
+    <wire from="(330,400)" to="(340,400)"/>
+    <wire from="(340,250)" to="(350,250)"/>
   </circuit>
 </project>
