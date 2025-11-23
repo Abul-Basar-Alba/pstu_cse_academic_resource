@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traceroute Lab - Network Path Visualization</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 1.2em;
+        }
+
+        .controls {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .input-group input {
+            flex: 1;
+            min-width: 300px;
+            padding: 15px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            transition: border-color 0.3s;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .btn {
+            padding: 15px 40px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #48bb78;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #38a169;
+        }
+
+        .results {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+        }
+
+        .results h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .hop-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .hop-table th {
+            background: #667eea;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        .hop-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .hop-table tr:hover {
+            background: #f8f9ff;
+        }
+
+        .hop-number {
+            font-weight: bold;
+            color: #667eea;
+            font-size: 1.2em;
+        }
+
+        .rtt-bar {
+            height: 8px;
+            background: linear-gradient(90deg, #48bb78, #f6ad55, #fc8181);
+            border-radius: 4px;
+            margin-top: 5px;
+        }
+
+        .destination-badge {
+            background: #fc8181;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .stat-card h3 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .stat-card p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .chart-container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+        }
+
+        #rttChart {
+            max-height: 400px;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 50px;
+            font-size: 1.5em;
+            color: #667eea;
+        }
+
+        .loading::after {
+            content: '...';
+            animation: dots 1.5s steps(4, end) infinite;
+        }
+
+        @keyframes dots {
+            0%, 20% { content: '.'; }
+            40% { content: '..'; }
+            60% { content: '...'; }
+            80%, 100% { content: ''; }
+        }
+
+        .info-box {
+            background: #e6f7ff;
+            border-left: 4px solid #1890ff;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .example-commands {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .example-commands code {
+            display: block;
+            padding: 8px;
+            color: #d63384;
+        }
+
+        .map-container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+            min-height: 400px;
+        }
+
+        .footer {
+            text-align: center;
+            color: white;
+            margin-top: 50px;
+            padding: 20px;
+        }
+
+        .footer p {
+            font-size: 1.1em;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🌐 Traceroute Lab Visualization</h1>
+            <p>Network Path Discovery & Analysis Dashboard</p>
+            <p style="font-size: 0.9em; color: #999; margin-top: 10px;">
+                CCE-314 (Networking Sessional) - Python Implementation
+            </p>
+        </div>
+
+        <!-- Instructions -->
+        <div class="controls">
+            <div class="info-box">
+                <strong>📌 How to Use:</strong>
+                <ol style="margin-top: 10px; margin-left: 20px;">
+                    <li>Run traceroute from terminal and export results to JSON</li>
+                    <li>Load the JSON file using the "Load Results" button below</li>
+                    <li>View beautiful visualization of your network path!</li>
+                </ol>
+                <div class="example-commands">
+                    <strong>Example Commands:</strong>
+                    <code>$ sudo python3 traceroute_enhanced.py google.com --export-json</code>
+                    <code>$ sudo python3 traceroute_enhanced.py 8.8.8.8 --export-json</code>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <input type="file" id="fileInput" accept=".json" style="display: none;">
+                <button class="btn btn-primary" onclick="document.getElementById('fileInput').click()">
+                    📂 Load Traceroute Results (JSON)
+                </button>
+                <button class="btn btn-secondary" onclick="loadSampleData()">
+                    🎯 Load Sample Data
+                </button>
+            </div>
+        </div>
+
+        <!-- Statistics Cards -->
+        <div id="statsContainer" style="display: none;">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3 id="totalHops">0</h3>
+                    <p>Total Hops</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="avgRTT">0 ms</h3>
+                    <p>Average RTT</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="maxRTT">0 ms</h3>
+                    <p>Maximum RTT</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="destinationIP">-</h3>
+                    <p>Destination</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- RTT Chart -->
+        <div id="chartContainer" class="chart-container" style="display: none;">
+            <h2>📊 Round-Trip Time Analysis</h2>
+            <canvas id="rttChart"></canvas>
+        </div>
+
+        <!-- Hop Table -->
+        <div id="resultsContainer" class="results" style="display: none;">
+            <h2>🛣️ Network Path Details</h2>
+            <table class="hop-table" id="hopTable">
+                <thead>
+                    <tr>
+                        <th>Hop</th>
+                        <th>IP Address</th>
+                        <th>Hostname</th>
+                        <th>RTT</th>
+                        <th>Location</th>
+                        <th>ISP</th>
+                    </tr>
+                </thead>
+                <tbody id="hopTableBody">
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Map -->
+        <div id="mapContainer" class="map-container" style="display: none;">
+            <h2>🗺️ Geographic Path Visualization</h2>
+            <p style="color: #666; margin-bottom: 15px;">
+                Geographic path will be displayed here if location data is available.
+            </p>
+            <div id="mapDisplay" style="min-height: 300px; background: #f5f5f5; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #999;">
+                <p>Map visualization requires geolocation data in the JSON file</p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>💻 Traceroute Lab - Computer Networking Project</p>
+            <p style="font-size: 0.9em; margin-top: 10px;">
+                Built with ❤️ for CCE-314 (Networking Sessional)
+            </p>
+        </div>
+    </div>
+
+    <!-- Chart.js Library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        let chartInstance = null;
+
+        // File input handler
+        document.getElementById('fileInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    try {
+                        const data = JSON.parse(event.target.result);
+                        displayResults(data);
+                    } catch (error) {
+                        alert('Error reading JSON file: ' + error.message);
+                    }
+                };
+                reader.readAsText(file);
+            }
+        });
+
+        // Load sample data for demonstration
+        function loadSampleData() {
+            const sampleData = {
+                "destination": "google.com",
+                "destination_ip": "142.250.185.46",
+                "timestamp": "2025-11-23T10:45:00",
+                "hops": [
+                    {
+                        "hop": 1,
+                        "ip": "192.168.0.1",
+                        "hostname": "router.local",
+                        "rtt": 3.45,
+                        "geo": {
+                            "country": "Private Network",
+                            "city": "Local",
+                            "isp": "Private",
+                            "lat": 0,
+                            "lon": 0
+                        },
+                        "is_destination": false
+                    },
+                    {
+                        "hop": 2,
+                        "ip": "10.12.16.1",
+                        "hostname": "gateway.isp.net",
+                        "rtt": 18.23,
+                        "geo": {
+                            "country": "United States",
+                            "city": "New York",
+                            "isp": "Verizon",
+                            "lat": 40.7128,
+                            "lon": -74.0060
+                        },
+                        "is_destination": false
+                    },
+                    {
+                        "hop": 3,
+                        "ip": "172.16.45.2",
+                        "hostname": "core-router.backbone.net",
+                        "rtt": 25.67,
+                        "geo": {
+                            "country": "United States",
+                            "city": "Chicago",
+                            "isp": "AT&T",
+                            "lat": 41.8781,
+                            "lon": -87.6298
+                        },
+                        "is_destination": false
+                    },
+                    {
+                        "hop": 4,
+                        "ip": "108.170.252.1",
+                        "hostname": "google-peer.net",
+                        "rtt": 45.32,
+                        "geo": {
+                            "country": "United States",
+                            "city": "Kansas City",
+                            "isp": "Google",
+                            "lat": 39.0997,
+                            "lon": -94.5786
+                        },
+                        "is_destination": false
+                    },
+                    {
+                        "hop": 5,
+                        "ip": "142.250.185.46",
+                        "hostname": "google.com",
+                        "rtt": 78.91,
+                        "geo": {
+                            "country": "United States",
+                            "city": "Mountain View",
+                            "isp": "Google LLC",
+                            "lat": 37.4056,
+                            "lon": -122.0775
+                        },
+                        "is_destination": true
+                    }
+                ]
+            };
+            displayResults(sampleData);
+        }
+
+        // Display results
+        function displayResults(data) {
+            // Show containers
+            document.getElementById('statsContainer').style.display = 'block';
+            document.getElementById('chartContainer').style.display = 'block';
+            document.getElementById('resultsContainer').style.display = 'block';
+            document.getElementById('mapContainer').style.display = 'block';
+
+            // Filter valid hops
+            const validHops = data.hops.filter(h => h.ip !== null && h.rtt !== null);
+
+            // Calculate statistics
+            const totalHops = validHops.length;
+            const rtts = validHops.map(h => h.rtt);
+            const avgRTT = (rtts.reduce((a, b) => a + b, 0) / rtts.length).toFixed(2);
+            const maxRTT = Math.max(...rtts).toFixed(2);
+
+            // Update statistics
+            document.getElementById('totalHops').textContent = totalHops;
+            document.getElementById('avgRTT').textContent = avgRTT + ' ms';
+            document.getElementById('maxRTT').textContent = maxRTT + ' ms';
+            document.getElementById('destinationIP').textContent = data.destination;
+
+            // Populate table
+            const tbody = document.getElementById('hopTableBody');
+            tbody.innerHTML = '';
+            
+            data.hops.forEach(hop => {
+                if (hop.ip) {
+                    const row = tbody.insertRow();
+                    
+                    // Hop number
+                    const cellHop = row.insertCell();
+                    cellHop.innerHTML = `<span class="hop-number">${hop.hop}</span>`;
+                    
+                    // IP
+                    const cellIP = row.insertCell();
+                    cellIP.textContent = hop.ip;
+                    
+                    // Hostname
+                    const cellHost = row.insertCell();
+                    cellHost.textContent = hop.hostname || '-';
+                    
+                    // RTT with bar
+                    const cellRTT = row.insertCell();
+                    const rttPercent = (hop.rtt / Math.max(...rtts)) * 100;
+                    cellRTT.innerHTML = `
+                        <div>${hop.rtt.toFixed(2)} ms</div>
+                        <div class="rtt-bar" style="width: ${rttPercent}%"></div>
+                    `;
+                    
+                    // Location
+                    const cellLocation = row.insertCell();
+                    if (hop.geo) {
+                        cellLocation.textContent = `${hop.geo.city}, ${hop.geo.country}`;
+                    } else {
+                        cellLocation.textContent = '-';
+                    }
+                    
+                    // ISP with destination badge
+                    const cellISP = row.insertCell();
+                    let ispText = hop.geo ? hop.geo.isp : '-';
+                    if (hop.is_destination) {
+                        cellISP.innerHTML = `${ispText} <span class="destination-badge">DESTINATION</span>`;
+                    } else {
+                        cellISP.textContent = ispText;
+                    }
+                }
+            });
+
+            // Create chart
+            createChart(validHops);
+        }
+
+        // Create RTT chart
+        function createChart(hops) {
+            const ctx = document.getElementById('rttChart').getContext('2d');
+            
+            // Destroy existing chart
+            if (chartInstance) {
+                chartInstance.destroy();
+            }
+
+            const labels = hops.map(h => `Hop ${h.hop}`);
+            const rtts = hops.map(h => h.rtt);
+
+            chartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Round-Trip Time (ms)',
+                        data: rtts,
+                        borderColor: '#667eea',
+                        backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                        borderWidth: 3,
+                        pointRadius: 6,
+                        pointBackgroundColor: '#667eea',
+                        pointBorderColor: '#fff',
+                        pointBorderWidth: 2,
+                        pointHoverRadius: 8,
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top',
+                            labels: {
+                                font: {
+                                    size: 14,
+                                    weight: 'bold'
+                                }
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                            padding: 12,
+                            titleFont: {
+                                size: 14
+                            },
+                            bodyFont: {
+                                size: 13
+                            },
+                            callbacks: {
+                                label: function(context) {
+                                    return ` RTT: ${context.parsed.y.toFixed(2)} ms`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Round-Trip Time (ms)',
+                                font: {
+                                    size: 14,
+                                    weight: 'bold'
+                                }
+                            },
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.05)'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Network Hops',
+                                font: {
+                                    size: 14,
+                                    weight: 'bold'
+                                }
+                            },
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Load sample data on page load for demo
+        window.addEventListener('load', function() {
+            console.log('Traceroute Visualization Dashboard Ready!');
+        });
+    </script>
+</body>
+</html>

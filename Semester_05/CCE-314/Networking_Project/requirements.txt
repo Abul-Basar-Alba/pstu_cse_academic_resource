@@ -1,0 +1,71 @@
+# Requirements for Enhanced Traceroute Lab
+
+## Core Dependencies (Already Available)
+- Python 3.6+
+- Standard library modules:
+  - socket
+  - struct
+  - time
+  - sys
+  - select
+  - os
+  - json
+  - datetime
+
+## Optional Dependencies (For Enhanced Features)
+
+### For Graphical Visualization
+```bash
+pip install matplotlib
+```
+**Purpose:** Creates visual charts showing:
+- RTT vs Hop Number graph
+- Geographic path visualization
+- Network topology mapping
+
+### For Geolocation Features
+```bash
+pip install requests
+```
+**Purpose:** Enables IP geolocation to show:
+- Country and city of each router
+- ISP information
+- Autonomous System (AS) details
+
+## Installation Commands
+
+### Install all optional dependencies:
+```bash
+pip install matplotlib requests
+```
+
+### Or using requirements.txt:
+```bash
+pip install -r requirements.txt
+```
+
+## Platform Requirements
+- **Linux/Unix/macOS**: Full support
+- **Windows**: Requires administrator privileges and may have limited functionality
+
+## Network Requirements
+- **Root/Administrator access**: Required for raw socket operations
+- **Internet connection**: Required for:
+  - Running traceroute to external hosts
+  - Geolocation API calls (ip-api.com)
+  - DNS resolution
+
+## Optional API Services
+- **ip-api.com**: Free IP geolocation (45 requests/minute limit)
+  - No API key required
+  - Automatic fallback if unavailable
+
+## System Resources
+- **Memory**: Minimal (< 50 MB)
+- **CPU**: Low usage
+- **Disk**: < 10 MB for program + generated output files
+
+## Notes
+- The basic traceroute functionality works WITHOUT any pip installations
+- Enhanced features (visualization, geolocation) are OPTIONAL
+- Program gracefully degrades if optional packages unavailable
