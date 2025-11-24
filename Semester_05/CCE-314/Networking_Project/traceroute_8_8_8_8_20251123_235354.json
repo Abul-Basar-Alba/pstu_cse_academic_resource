@@ -1,0 +1,218 @@
+{
+  "destination": "8.8.8.8",
+  "destination_ip": "8.8.8.8",
+  "timestamp": "2025-11-23T23:53:54.220719",
+  "hops": [
+    {
+      "hop": 1,
+      "ip": "192.168.0.1",
+      "hostname": "_gateway",
+      "rtt": 1.9723574320475261,
+      "geo": {
+        "country": "Private Network",
+        "city": "Local",
+        "lat": 0,
+        "lon": 0,
+        "isp": "Private"
+      },
+      "is_destination": false
+    },
+    {
+      "hop": 2,
+      "ip": "10.27.221.0",
+      "hostname": "10.27.221.0",
+      "rtt": 1.2829303741455078,
+      "geo": {
+        "country": "Private Network",
+        "city": "Local",
+        "lat": 0,
+        "lon": 0,
+        "isp": "Private"
+      },
+      "is_destination": false
+    },
+    {
+      "hop": 3,
+      "ip": "103.133.254.33",
+      "hostname": "103.133.254.33",
+      "rtt": 1.4906724294026692,
+      "geo": {
+        "country": "Bangladesh",
+        "city": "Patuakhali",
+        "lat": 22.3683,
+        "lon": 90.3458,
+        "isp": "Patuakhali Science and Technology University",
+        "as": "AS138587 Patuakhali Science and Technology University"
+      },
+      "is_destination": false
+    },
+    {
+      "hop": 4,
+      "ip": "103.133.254.17",
+      "hostname": "103.133.254.17",
+      "rtt": 2.393007278442383,
+      "geo": {
+        "country": "Bangladesh",
+        "city": "Patuakhali",
+        "lat": 22.3683,
+        "lon": 90.3458,
+        "isp": "Patuakhali Science and Technology University",
+        "as": "AS138587 Patuakhali Science and Technology University"
+      },
+      "is_destination": false
+    },
+    {
+      "hop": 5,
+      "ip": "103.28.120.77",
+      "hostname": "103.28.120.77",
+      "rtt": 1.9159317016601562,
+      "geo": {
+        "country": "Bangladesh",
+        "city": "R\u0101ng\u0101m\u0101ti",
+        "lat": 22.6432,
+        "lon": 92.1919,
+        "isp": "Bangladesh Research and Education Network (BdREN)",
+        "as": "AS63961 Bangladesh Research and Education Network (BdREN)"
+      },
+      "is_destination": false
+    },
+    {
+      "hop": 6,
+      "ip": "100.100.6.53",
+      "hostname": "100.100.6.53",
+      "rtt": 5.742788314819336,
+      "geo": null,
+      "is_destination": false
+    },
+    {
+      "hop": 7,
+      "ip": "100.100.1.85",
+      "hostname": "100.100.1.85",
+      "rtt": 4.625797271728516,
+      "geo": null,
+      "is_destination": false
+    },
+    {
+      "hop": 8,
+      "ip": "100.100.0.97",
+      "hostname": "100.100.0.97",
+      "rtt": 4.758596420288086,
+      "geo": null,
+      "is_destination": false
+    },
+    {
+      "hop": 9,
+      "ip": "103.16.152.46",
+      "hostname": "103.16.152.46",
+      "rtt": 54.87926801045736,
+      "geo": {
+        "country": "Bangladesh",
+        "city": "Dhaka",
+        "lat": 23.7705,
+        "lon": 90.408,
+        "isp": "Bangladesh Submarine Cable Company Limited",
+        "as": "AS132602 Bangladesh Submarine Cable Company Limited (BSCCL)"
+      },
+      "is_destination": false
+    },
+    {
+      "hop": 10,
+      "ip": null,
+      "hostname": null,
+      "rtt": null,
+      "geo": null,
+      "is_destination": false
+    },
+    {
+      "hop": 11,
+      "ip": "103.16.152.82",
+      "hostname": "103.16.152.82",
+      "rtt": 54.61899439493815,
+      "geo": {
+        "country": "Bangladesh",
+        "city": "Dhaka",
+        "lat": 23.7705,
+        "lon": 90.408,
+        "isp": "Bangladesh Submarine Cable Company Limited",
+        "as": "AS132602 Bangladesh Submarine Cable Company Limited (BSCCL)"
+      },
+      "is_destination": false
+    },
+    {
+      "hop": 12,
+      "ip": null,
+      "hostname": null,
+      "rtt": null,
+      "geo": null,
+      "is_destination": false
+    },
+    {
+      "hop": 13,
+      "ip": null,
+      "hostname": null,
+      "rtt": null,
+      "geo": null,
+      "is_destination": false
+    },
+    {
+      "hop": 14,
+      "ip": "142.250.165.236",
+      "hostname": "142.250.165.236",
+      "rtt": 51.74064636230469,
+      "geo": {
+        "country": "United States",
+        "city": "Mountain View",
+        "lat": 37.4225,
+        "lon": -122.085,
+        "isp": "Google LLC",
+        "as": "AS15169 Google LLC"
+      },
+      "is_destination": false
+    },
+    {
+      "hop": 15,
+      "ip": "142.250.238.115",
+      "hostname": "142.250.238.115",
+      "rtt": 54.584105809529625,
+      "geo": {
+        "country": "United States",
+        "city": "Mountain View",
+        "lat": 37.4225,
+        "lon": -122.085,
+        "isp": "Google LLC",
+        "as": "AS15169 Google LLC"
+      },
+      "is_destination": false
+    },
+    {
+      "hop": 16,
+      "ip": "142.251.240.253",
+      "hostname": "142.251.240.253",
+      "rtt": 53.35593223571777,
+      "geo": {
+        "country": "United States",
+        "city": "Mountain View",
+        "lat": 37.4225,
+        "lon": -122.085,
+        "isp": "Google LLC",
+        "as": "AS15169 Google LLC"
+      },
+      "is_destination": false
+    },
+    {
+      "hop": 17,
+      "ip": "8.8.8.8",
+      "hostname": "dns.google",
+      "rtt": 53.04384231567383,
+      "geo": {
+        "country": "United States",
+        "city": "Ashburn",
+        "lat": 39.03,
+        "lon": -77.5,
+        "isp": "Google LLC",
+        "as": "AS15169 Google LLC"
+      },
+      "is_destination": true
+    }
+  ]
+}

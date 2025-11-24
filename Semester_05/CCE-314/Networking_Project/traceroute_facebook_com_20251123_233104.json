@@ -1,0 +1,229 @@
+{
+  "destination": "facebook.com",
+  "destination_ip": "31.13.64.35",
+  "timestamp": "2025-11-23T23:31:04.604155",
+  "hops": [
+    {
+      "hop": 1,
+      "ip": "192.168.0.1",
+      "hostname": "_gateway",
+      "rtt": 1.8947124481201172,
+      "geo": {
+        "country": "Private Network",
+        "city": "Local",
+        "lat": 0,
+        "lon": 0,
+        "isp": "Private"
+      },
+      "is_destination": false
+    },
+    {
+      "hop": 2,
+      "ip": "10.27.221.0",
+      "hostname": "10.27.221.0",
+      "rtt": 1.733541488647461,
+      "geo": {
+        "country": "Private Network",
+        "city": "Local",
+        "lat": 0,
+        "lon": 0,
+        "isp": "Private"
+      },
+      "is_destination": false
+    },
+    {
+      "hop": 3,
+      "ip": "103.133.254.33",
+      "hostname": "103.133.254.33",
+      "rtt": 1.5428860982259114,
+      "geo": {
+        "country": "Bangladesh",
+        "city": "Patuakhali",
+        "lat": 22.3683,
+        "lon": 90.3458,
+        "isp": "Patuakhali Science and Technology University",
+        "as": "AS138587 Patuakhali Science and Technology University"
+      },
+      "is_destination": false
+    },
+    {
+      "hop": 4,
+      "ip": "103.133.254.17",
+      "hostname": "103.133.254.17",
+      "rtt": 2.967357635498047,
+      "geo": {
+        "country": "Bangladesh",
+        "city": "Patuakhali",
+        "lat": 22.3683,
+        "lon": 90.3458,
+        "isp": "Patuakhali Science and Technology University",
+        "as": "AS138587 Patuakhali Science and Technology University"
+      },
+      "is_destination": false
+    },
+    {
+      "hop": 5,
+      "ip": "103.28.120.77",
+      "hostname": "103.28.120.77",
+      "rtt": 2.1135807037353516,
+      "geo": {
+        "country": "Bangladesh",
+        "city": "R\u0101ng\u0101m\u0101ti",
+        "lat": 22.6432,
+        "lon": 92.1919,
+        "isp": "Bangladesh Research and Education Network (BdREN)",
+        "as": "AS63961 Bangladesh Research and Education Network (BdREN)"
+      },
+      "is_destination": false
+    },
+    {
+      "hop": 6,
+      "ip": "100.100.6.53",
+      "hostname": "100.100.6.53",
+      "rtt": 5.742390950520833,
+      "geo": null,
+      "is_destination": false
+    },
+    {
+      "hop": 7,
+      "ip": "100.100.1.85",
+      "hostname": "100.100.1.85",
+      "rtt": 7.261037826538086,
+      "geo": null,
+      "is_destination": false
+    },
+    {
+      "hop": 8,
+      "ip": "100.100.0.97",
+      "hostname": "100.100.0.97",
+      "rtt": 12.38711675008138,
+      "geo": null,
+      "is_destination": false
+    },
+    {
+      "hop": 9,
+      "ip": "100.100.0.54",
+      "hostname": "100.100.0.54",
+      "rtt": 5.542596181233724,
+      "geo": null,
+      "is_destination": false
+    },
+    {
+      "hop": 10,
+      "ip": "172.28.48.133",
+      "hostname": "172.28.48.133",
+      "rtt": 5.091349283854167,
+      "geo": {
+        "country": "Private Network",
+        "city": "Local",
+        "lat": 0,
+        "lon": 0,
+        "isp": "Private"
+      },
+      "is_destination": false
+    },
+    {
+      "hop": 11,
+      "ip": "10.172.22.61",
+      "hostname": "10.172.22.61",
+      "rtt": 10.843515396118164,
+      "geo": {
+        "country": "Private Network",
+        "city": "Local",
+        "lat": 0,
+        "lon": 0,
+        "isp": "Private"
+      },
+      "is_destination": false
+    },
+    {
+      "hop": 12,
+      "ip": "10.172.22.9",
+      "hostname": "10.172.22.9",
+      "rtt": 9.586731592814127,
+      "geo": {
+        "country": "Private Network",
+        "city": "Local",
+        "lat": 0,
+        "lon": 0,
+        "isp": "Private"
+      },
+      "is_destination": false
+    },
+    {
+      "hop": 13,
+      "ip": "157.240.89.32",
+      "hostname": "ae8.pr03.ccu1.tfbnw.net",
+      "rtt": 13.387044270833334,
+      "geo": {
+        "country": "India",
+        "city": "Kolkata",
+        "lat": 22.5726,
+        "lon": 88.3639,
+        "isp": "Facebook, Inc.",
+        "as": "AS32934 Facebook, Inc."
+      },
+      "is_destination": false
+    },
+    {
+      "hop": 14,
+      "ip": "129.134.54.36",
+      "hostname": "po205.asw02.ccu2.tfbnw.net",
+      "rtt": 13.25241724650065,
+      "geo": {
+        "country": "India",
+        "city": "Kolkata",
+        "lat": 22.5726,
+        "lon": 88.3639,
+        "isp": "Facebook, Inc.",
+        "as": "AS32934 Facebook, Inc."
+      },
+      "is_destination": false
+    },
+    {
+      "hop": 15,
+      "ip": "129.134.88.87",
+      "hostname": "psw04.ccu1.tfbnw.net",
+      "rtt": 16.74350102742513,
+      "geo": {
+        "country": "India",
+        "city": "Kolkata",
+        "lat": 22.5726,
+        "lon": 88.3639,
+        "isp": "Facebook, Inc.",
+        "as": "AS32934 Facebook, Inc."
+      },
+      "is_destination": false
+    },
+    {
+      "hop": 16,
+      "ip": "129.134.113.13",
+      "hostname": "msw1am.02.ccu1.tfbnw.net",
+      "rtt": 18.56708526611328,
+      "geo": {
+        "country": "India",
+        "city": "Kolkata",
+        "lat": 22.5726,
+        "lon": 88.3639,
+        "isp": "Facebook, Inc.",
+        "as": "AS32934 Facebook, Inc."
+      },
+      "is_destination": false
+    },
+    {
+      "hop": 17,
+      "ip": "31.13.64.35",
+      "hostname": "edge-star-mini-shv-02-ccu1.facebook.com",
+      "rtt": 13.917922973632812,
+      "geo": {
+        "country": "India",
+        "city": "Kolkata",
+        "lat": 22.5643,
+        "lon": 88.3693,
+        "isp": "Facebook, Inc.",
+        "as": "AS32934 Facebook, Inc."
+      },
+      "is_destination": true
+    }
+  ]
+}
